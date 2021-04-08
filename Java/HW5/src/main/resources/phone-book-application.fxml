@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="600.0" prefWidth="800.0" stylesheets="@css/general-style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.hse.edu.phone.View.PhoneBookController">
+  <MenuBar>
+      <menus>
+         <Menu mnemonicParsing="false" text="Файл">
+           <items>
+             <MenuItem fx:id="menuAdd" mnemonicParsing="false" text="Добавить" onAction="#onAddClicked"/>
+             <MenuItem fx:id="menuEdit" mnemonicParsing="false" text="Редактировать" onAction="#onEditClicked" />
+             <MenuItem fx:id="menuDelete" mnemonicParsing="false" text="Удалить" onAction="#onDeleteClicked"/>
+             <MenuItem mnemonicParsing="false" text="Выход" onAction="#onExit"/>
+           </items>
+         </Menu>
+         <Menu mnemonicParsing="false" text="Настройки">
+           <items>
+             <MenuItem mnemonicParsing="false" text="Импортировать" onAction="#onImport"/>
+             <MenuItem mnemonicParsing="false" text="Экспортировать" onAction="#onExport"/>
+           </items>
+         </Menu>
+         <Menu mnemonicParsing="false">
+           <graphic>
+             <Label text="Справка" onMouseClicked="#onInfo"/>
+           </graphic>
+         </Menu>
+      </menus></MenuBar>
+  <VBox spacing="10" VBox.vgrow="ALWAYS">
+
+    <TableView fx:id="phoneBookTableView" VBox.vgrow="ALWAYS" stylesheets="@css/table-view-style.css">
+      <columns>
+        <TableColumn fx:id="lastNameColumn" minWidth="70" prefWidth="70" text="ФАМИЛИЯ">
+        </TableColumn>
+        <TableColumn fx:id="firstNameColumn" minWidth="60" prefWidth="60" text="ИМЯ">
+        </TableColumn>
+        <TableColumn fx:id="secondNameColumn" minWidth="70" prefWidth="70" text="ОТЧЕСТВО">
+        </TableColumn>
+        <TableColumn fx:id="mobilePhoneColumn" minWidth="100" prefWidth="100" sortable="false" text="МОБ. ТЕЛ.">
+        </TableColumn>
+        <TableColumn fx:id="homePhoneColumn" minWidth="100" prefWidth="100" sortable="false" text="ДОМ.ТЕЛ.">
+        </TableColumn>
+        <TableColumn fx:id="addressColumn" minWidth="100" prefWidth="100" text="АДРЕС">
+        </TableColumn>
+        <TableColumn fx:id="birthdayColumn" minWidth="80" text="ДЕНЬ&#10;РОЖДЕНИЯ">
+        </TableColumn>
+        <TableColumn fx:id="commentColumn" minWidth="110.0" text="КОММЕНТАРИЙ">
+        </TableColumn>
+      </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+    </TableView>
+
+  <HBox alignment="CENTER_LEFT" spacing="10">
+    <TextField fx:id="searchField" minWidth="200" promptText="Search contact:" HBox.hgrow="ALWAYS"/>
+    <Button text="ПОИСК" onMouseClicked="#onSearch"/>
+
+    <Button fx:id="deleteButton" text="УДАЛИТЬ" onMouseClicked="#onDeleteClicked"/>
+    <Button fx:id="editButton" text="РЕДАКТИРОВАТЬ" onMouseClicked="#onEditClicked"/>
+    <Button text="ДОБАВИТЬ" onMouseClicked="#onAddClicked"/>
+  </HBox>
+
+  <padding>
+    <Insets bottom="10" left="10.0" right="10.0" top="10.0" />
+  </padding>
+  </VBox>
+</VBox>

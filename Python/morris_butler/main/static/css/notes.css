@@ -1,0 +1,185 @@
+body {
+  background-color: #ffe;
+}
+
+.nav-item:hover {
+  border-bottom: 5px solid #ffeeba;
+}
+
+nav .active-link {
+  border-bottom: 5px solid #856404;
+}
+
+.logo {
+  color: #856404;
+}
+
+h1 {
+  color: #856404;
+  margin: 8% 50px 50px 50px;
+}
+
+h3 {
+  color: #856404;
+}
+
+.btn {
+  color: #856404;
+  background-color: #ffeeba;
+  border: 1px solid rgba(0, 0, 0, .125);
+  transition: 0.2s;
+}
+
+.btn:hover {
+  color: #856404;
+  background-color: #ffeeba;
+  border: 1px solid rgba(0, 0, 0, .125);
+  box-shadow: 1px 1px 25px 0px rgba(0, 0, 0, 0.25);
+  transition: 0.2s;
+}
+
+.active {
+  background-color: #ffe8a1;
+}
+
+a {
+  color: #856404;
+}
+
+a:hover {
+  color: #856404;
+  text-decoration: none;
+  text-shadow: 1px 1px 25px 0px rgba(0, 0, 0, 0.25);
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+.delete {
+  color: #fff;
+  background-color: red;
+  border: 1px solid rgba(0, 0, 0, .125);
+  padding: 1px 5px;
+  transition: 0.5s;
+  margin-right: 5px;
+  border-radius: 50%;  
+}
+
+.delete:hover {
+  color: #fff;
+  background-color: red;
+}
+
+.main {
+  border-top: 2px solid #856404;
+  height: 540px;
+}
+
+.menu {
+  padding: 0px;
+}
+
+.folder {
+  margin: 15px;
+}
+
+.list-group {
+  margin: 0;
+  padding: 0;
+}
+
+.list-group-item {
+  transition: 0.5s;
+}
+
+.list-group-item:hover {
+  box-shadow: 1px 1px 25px 0px rgba(0, 0, 0, 0.25);
+  transition: 0.5s;
+}
+
+.notes-list {
+  border-right: 2px solid #856404;
+  border-left: 2px solid #856404;
+  padding: 0px;
+  height: 540px;
+  width: 100%;
+}
+
+.toolbar {
+  border-bottom: 2px solid #856404;
+}
+
+.dropdown {
+  padding: 0px;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.input-group {
+  margin: 15px 0px;
+}
+
+.search {
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-left: 15px;
+  width: auto;
+}
+
+.list {
+  height: 420px;
+  overflow: auto; 
+}
+
+.list .list-group-item {
+  padding: 2.75rem 1.25rem;
+  padding-top: 0.75rem;
+  padding-bottom: 2.25rem;
+  text-align: inherit;
+}
+
+.view {
+  height: 540px;
+}
+
+.note {
+  padding: 15px;
+  height: 480px;
+}
+
+.text {
+  width: 100%;
+  height: 350px;
+  overflow: auto;
+}
+
+.date {
+  color: #856404;
+}
+
+.folder-now {
+  color: #999;
+}
+
+.join {
+  margin: auto;
+  padding: auto;
+}
+
+.modal-header {
+  background-color: #ffeeba;
+  border-bottom: 0px;
+}
+
+.modal-body {
+  background-color: #fff3cd;
+}
+
+.modal-footer {
+  background-color: #ffeeba;
+  border-top: 0px;
+}

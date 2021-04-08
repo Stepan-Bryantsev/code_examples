@@ -1,0 +1,58 @@
+.root {
+    -fx-background-color: #E4E4DD;
+    -fx-font-size: 10pt;
+}
+
+.menu-bar {
+    -fx-background-color: #6b705c;
+}
+
+.menu:hover{
+    -fx-background-color: #34372F;
+}
+
+.menu-bar .label{
+    -fx-text-fill: white;
+}
+
+.menu-item{
+    -fx-background-color: #6b705c;
+}
+.menu-bar {
+    -fx-background-color: #6b705c;
+}
+
+.menu-item:hover{
+    -fx-background-color: #34372F;
+}
+
+.button{
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-background-color: #6b705c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.button:hover{
+    -fx-background-color: #34372F;
+}
+
+.text-field {
+    -fx-padding: 10;
+    -fx-background-color: E4E4DD;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-border-color: #2A2C26;
+    -fx-prompt-text-fill: gray;
+}
+
+.date-picker {
+    -fx-background-color: E4E4DD;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 0;
+    -fx-border-color: #2A2C26;
+    -fx-prompt-text-fill: gray;
+}

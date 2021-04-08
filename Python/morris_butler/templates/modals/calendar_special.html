@@ -1,0 +1,375 @@
+{% load staticfiles %}
+<div class="modal fade" id="Edit-Date">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Редактирование мероприятия</h2>
+            </div>
+            <div class="modal-body">
+                <form id="edit_event_form">
+                    {% csrf_token %}
+                    {{ edit_event_form.media }}
+                    <div class="form-group">
+                        <h3>Изменить название</h3>
+
+                        {{ edit_event_form.event_edit_title}}
+                    </div>
+                    <div class="form-group">
+                        <h3>Изменить дату</h3>
+                        <span>{{ add_event_form.event_edit_deadline }}</span>
+                        <span>{{ add_event_form.event_edit_time }}</span>
+                    </div>
+                   <div class="form-group">
+                        <h3>Изменить описание</h3>
+                       {{ edit_event_form.event_edit_description }}
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check btn btn-light">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">Приватное мероприятие</label>
+                            <span>{{edit_event_form.is_public}}</span>
+                        </div>
+                    </div>
+                </form>
+                <h3>Записать аудио</h3>
+                <button type="button" class="btn btn-light btn-lg btn-block">
+                    <picture>
+                        <img src='{% static "icons/micro_icon.png" %}'>
+                    </picture>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Отменить</button>
+                <button type="button" class="btn btn-light" onclick="save_event_ajax()" >Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="For-Today">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">События на сегодня</h2>
+            </div>
+            <div class="modal-body">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event">Событие, что очень важно мне
+                        <small>28.02.2018</small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event">Просто событие
+                        <small>27.02.2018</small>
+                        <small>Москва</small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event">День рождения
+                        <small>23.10.2018</small>
+                        <small>Королев</small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event">Событие, что напоминает мне о тех деньках
+                        <small>28.02.2018</small>
+                        <small>Мытищи</small>
+                    </a>
+                </div>
+                <nav class=" navbar navbar-pag">
+                    <div class="btn-group btn-group-lg">
+                        <a href="#">
+                            <button type="button" class="btn btn-light">&laquo;</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light disabled">1</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light">2</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light">3</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light">&raquo;</button>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="In-Map">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">События на карте</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Тут нужен JS -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="My">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Мои события</h2>
+            </div>
+            <div class="modal-body">
+                <div class="btn-group btn-group-lg">
+                    <button type="button" onclick="sorting('new', 'my')" class="btn btn-light">Сначала новые</button>
+                    <button type="button" onclick="sorting('old', 'my')" class="btn btn-light">Сначала старые</button>
+                    <button type="button" onclick="sorting('AtoZ', 'my')" class="btn btn-light">А..Я</button>
+                    <button type="button" onclick="sorting('ZtoA', 'my')" class="btn btn-light">Я..А</button>
+                </div>
+                <br/>
+                <div class="list-group" id="ViewMy">
+                    {% for item in my_events %}
+                    <a href="#" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event-Card" onclick="get_event_data_ajax({{ item.2 }}, 'my')">
+                        <h7>{{ item.0 }}</h7>
+                        <div class="date-and-place">
+                            <small>{{ item.1 }}</small>|<small><b>{{ item.4 }}</b></small>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% if my_pages %}
+                <nav class="navbar navbar-pag">
+                    <div class="btn-group btn-group-lg" id="user_page_holder">
+                        <a href="#"><button type="button" class="btn btn-light">&laquo;</button></a>
+                        {% for page in my_pages %}
+                        <a href="#"><button type="button" onclick="paginate({{ page }}, 'my')" class="btn btn-light">{{ page }}</button></a>
+                        {% endfor %}
+                        <a href="#"><button type="button" class="btn btn-light">&raquo;</button></a>
+                    </div>
+                </nav>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="All">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Все события</h2>
+            </div>
+            <div class="modal-body">
+                <div class="btn-group btn-group-lg">
+                    <button type="button" onclick="sorting('new', 'all')" class="btn btn-light">Сначала новые</button>
+                    <button type="button" onclick="sorting('old', 'all')" class="btn btn-light">Сначала старые</button>
+                    <button type="button" onclick="sorting('AtoZ', 'all')" class="btn btn-light">А..Я</button>
+                    <button type="button" onclick="sorting('ZtoA', 'all')" class="btn btn-light">Я..А</button>
+                </div>
+                <br/>
+                <div class="list-group" id="ViewAll">
+                    {% for item in all_events %}
+                    <a href="#All" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event-Card" onclick="get_event_data_ajax({{ item.2 }})">
+                        <h7>{{ item.0 }}</h7>
+                        <div class="date-and-place">
+                            <small>{{ item.1 }}</small>
+                            |
+                            <small><b>{{ item.4 }}</b></small>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% if all_pages %}
+                <nav class="navbar navbar-pag">
+                    <div class="btn-group btn-group-lg" id="all_page_holder">
+                        <a href="#"><button type="button" class="btn btn-light">&laquo;</button></a>
+                        {% for page in all_pages %}
+                        <a href="#"><button type="button" onclick="paginate({{ page }}, 'all')" class="btn btn-light">{{ page }}</button></a>
+                        {% endfor %}
+                        <a href="#"><button type="button" class="btn btn-light">&raquo;</button></a>
+                    </div>
+                </nav>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Recommended">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Рекомендованные события</h2>
+            </div>
+            <div class="modal-body">
+                <div class="btn-group btn-group-lg">
+                    <button type="button" class="btn btn-light">Сначала новые</button>
+                    <button type="button" class="btn btn-light">Сначала старые</button>
+                    <button type="button" class="btn btn-light">А..Я</button>
+                    <button type="button" class="btn btn-light">Я..А</button>
+                </div>
+                <br/>
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event">Dapibus ac facilisis in
+                        <small>28.02.2018</small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event">Morbi leo risus
+                        <small>27.02.2018</small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event">Porta ac consectetur ac
+                        <small>26.02.2018</small>
+                        <small>Мытищи</small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-light"
+                       data-toggle="modal" data-target="#Event">Vestibulum at eros
+                        <small>25.02.2018</small>
+                    </a>
+                </div>
+                <nav class=" navbar navbar-pag">
+                    <div class="btn-group btn-group-lg">
+                        <a href="#">
+                            <button type="button" class="btn btn-light">&laquo;</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light disabled">1</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light">2</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light">3</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light">&raquo;</button>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Watch-in-Map">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Карта</h2>
+            </div>
+            <div class="modal-body">
+                <!-- Тут нужен JS -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">ОК</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Synchronization">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Синхронизация</h2>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-light">Сохранить все события в файл</button>
+                <button type="button" class="btn btn-light" data-toggle="modal"
+                        data-target="#Choose-Synchronization">Сохранить часть событий в файл
+                </button>
+                <hr>
+                <div class="form-group btn btn-light">
+                    <label>Загрузить все события из файла</label>
+                    <input type="file" class="form-control-file">
+                </div>
+                <div class="form-group btn btn-light">
+                    <label>Загрузить некоторые события из файла</label>
+                    <input type="file" class="form-control-file">
+                </div>
+                <button type="button" class="btn btn-light">Синхронизировать</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Choose-Synchronization">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Выберите события для сохранения</h2>
+            </div>
+            <div class="modal-body">
+                <div class="list-group" style="margin-top: 10px;">
+                    <div class="form-check list-group-item list-group-item-light">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label"> Sad but True </label>
+                    </div>
+                    <div class="form-check list-group-item list-group-item-light">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label"> True but Sad </label>
+                    </div>
+                    <div class="form-check list-group-item list-group-item-light">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label"> but Sad True </label>
+                    </div>
+                    <div class="form-check list-group-item list-group-item-light">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label"> but True Sad</label>
+                    </div>
+                    <div class="form-check list-group-item list-group-item-light">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label"> Sad True but </label>
+                    </div>
+                    <div class="form-check list-group-item list-group-item-light">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label"> True Sad but</label>
+                    </div>
+                </div>
+                <nav class=" navbar navbar-pag">
+                    <div class="btn-group btn-group-lg">
+                        <a href="#">
+                            <button type="button" class="btn btn-light">&laquo;</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light disabled">1</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light">2</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light">3</button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-light">&raquo;</button>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-light">ОК</button>
+            </div>
+        </div>
+    </div>
+</div>

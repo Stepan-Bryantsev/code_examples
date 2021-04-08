@@ -1,0 +1,6 @@
+C:\Users\Stepa\Desktop\HSE\Xamarin\Notes\NotesServer\Server\ServerClassesLibrary\bin\Debug\ServerClassesLibrary.dll
+C:\Users\Stepa\Desktop\HSE\Xamarin\Notes\NotesServer\Server\ServerClassesLibrary\bin\Debug\ServerClassesLibrary.pdb
+C:\Users\Stepa\Desktop\HSE\Xamarin\Notes\NotesServer\Server\ServerClassesLibrary\obj\Debug\ServerClassesLibrary.csprojAssemblyReference.cache
+C:\Users\Stepa\Desktop\HSE\Xamarin\Notes\NotesServer\Server\ServerClassesLibrary\obj\Debug\ServerClassesLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Stepa\Desktop\HSE\Xamarin\Notes\NotesServer\Server\ServerClassesLibrary\obj\Debug\ServerClassesLibrary.dll
+C:\Users\Stepa\Desktop\HSE\Xamarin\Notes\NotesServer\Server\ServerClassesLibrary\obj\Debug\ServerClassesLibrary.pdb
